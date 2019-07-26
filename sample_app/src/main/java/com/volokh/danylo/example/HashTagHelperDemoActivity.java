@@ -47,12 +47,12 @@ public class HashTagHelperDemoActivity extends AppCompatActivity implements AnyT
         };
         // If you set additional symbols not only letters and digits will be a valid symbols for hashtag
         // Example: "hash_tag_with_underscore_and$dolar$sign$is$also$valid_hashtag"
-        mTextHashTagHelper = AnyTagHelper.Creator.create(getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorPrimary), additionalSymbols);
+        mTextHashTagHelper = AnyTagHelper.Creator.create(getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorSecondary), additionalSymbols);
         mTextHashTagHelper.setOnTagClickListener(this);
         mTextHashTagHelper.handle(mHashTagText);
 
         // Here we don't specify additionalSymbols. It means that in EditText only letters and digits will be valid symbols
-        mEditTextHashTagHelper = AnyTagHelper.Creator.create(getResources().getColor(R.color.colorPrimaryDark), getResources().getColor(R.color.colorPrimaryDark), null);
+        mEditTextHashTagHelper = AnyTagHelper.Creator.create(getResources().getColor(R.color.colorPrimaryDark), getResources().getColor(R.color.colorSecondaryDark), null);
         mEditTextHashTagHelper.handle(mEditTextView);
     }
 
