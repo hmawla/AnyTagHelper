@@ -40,6 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/single_item_height"
         android:text="@string/get_all_hashtags"/>
+    <Button
+        android:id="@+id/get_all_attags_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_item_height"
+        android:text="@string/get_all_tags"/>
+
 
     <TextView
         android:id="@+id/all_hashtags"

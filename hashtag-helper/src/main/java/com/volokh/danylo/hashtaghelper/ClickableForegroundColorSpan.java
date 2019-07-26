@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 /**
  * Created by danylo.volokh on 12/22/2015.
+ * Forked by pedromarthon on 25/07/2019
+ * Forked to allow multiple tag types in the same text view and to add newer logic
  * This class is a combination of {@link android.text.style.ForegroundColorSpan}
  * and {@link ClickableSpan}.
  *
@@ -16,15 +18,16 @@ import android.widget.TextView;
  */
 public class ClickableForegroundColorSpan extends ClickableSpan {
 
-    private OnHashTagClickListener mOnHashTagClickListener;
+    private OnTagClickListener mOnHashTagClickListener;
 
-    public interface OnHashTagClickListener {
+    public interface OnTagClickListener {
         void onHashTagClicked(String hashTag);
+        void onAtTagClicked(String atTag);
     }
 
     private final int mColor;
 
-    public ClickableForegroundColorSpan(@ColorInt int color, OnHashTagClickListener listener) {
+    public ClickableForegroundColorSpan(@ColorInt int color, OnTagClickListener listener) {
         mColor = color;
         mOnHashTagClickListener = listener;
 
@@ -46,6 +49,10 @@ public class ClickableForegroundColorSpan extends ClickableSpan {
         int start = s.getSpanStart(this);
         int end = s.getSpanEnd(this);
 
-        mOnHashTagClickListener.onHashTagClicked(text.subSequence(start + 1/*skip "#" sign*/, end).toString());
+        if(text.subSequence(start/*skip "#" sign*/, end).toString().startsWith("#")){
+            mOnHashTagClickListener.onHashTagClicked(text.subSequence(start + 1/*skip "#" sign*/, end).toString());
+        }else if(text.subSequence(start/*skip "#" sign*/, end).toString().startsWith("@")){
+            mOnHashTagClickListener.onAtTagClicked(text.subSequence(start + 1/*skip "@" sign*/, end).toString());
+        }
     }
 }
